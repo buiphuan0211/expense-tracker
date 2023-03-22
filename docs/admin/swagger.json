@@ -1,0 +1,44 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "All APIs for expenses admin.\n\n******************************\n- Add description\n******************************\n",
+        "title": "manage-expenses - Admin API",
+        "contact": {
+            "name": "Dev An Bui",
+            "url": "https://github.com/buiphuan0211",
+            "email": "buiphuan0211@gmail.com"
+        },
+        "version": "1.0"
+    },
+    "basePath": "/admin/expense",
+    "paths": {
+        "/ping": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Common"
+                ],
+                "summary": "Ping",
+                "operationId": "ping",
+                "responses": {}
+            }
+        }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}
