@@ -1,4 +1,40 @@
 basePath: /admin/expense
+definitions:
+  ptime.TimeResponse:
+    properties:
+      time:
+        type: string
+    type: object
+  requestmodel.CategoryCreatePayload:
+    properties:
+      name:
+        type: string
+    type: object
+  responsemodel.CategoryAll:
+    properties:
+      limit:
+        type: integer
+      list:
+        items:
+          $ref: '#/definitions/responsemodel.CategoryBrief'
+        type: array
+      total:
+        type: integer
+    type: object
+  responsemodel.CategoryBrief:
+    properties:
+      _id:
+        type: string
+      created:
+        $ref: '#/definitions/ptime.TimeResponse'
+      name:
+        type: string
+    type: object
+  responsemodel.Upsert:
+    properties:
+      _id:
+        type: string
+    type: object
 info:
   contact:
     email: buiphuan0211@gmail.com
@@ -13,6 +49,56 @@ info:
   title: manage-expenses - Admin API
   version: "1.0"
 paths:
+  /categories:
+    get:
+      consumes:
+      - application/json
+      operationId: admin-category-all
+      parameters:
+      - in: query
+        name: keyword
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsemodel.CategoryAll'
+      security:
+      - ApiKeyAuth: []
+      summary: All
+      tags:
+      - Category
+    post:
+      consumes:
+      - application/json
+      operationId: admin-category-create
+      parameters:
+      - description: Payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/requestmodel.CategoryCreatePayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsemodel.Upsert'
+      security:
+      - ApiKeyAuth: []
+      summary: Create
+      tags:
+      - Category
   /ping:
     get:
       consumes:

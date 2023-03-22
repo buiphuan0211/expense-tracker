@@ -9,7 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-var db *mongo.Database
+var expenseTrackerDB *mongo.Database
 
 // ConnectMongoDBExpenseTracker ...
 func ConnectMongoDBExpenseTracker() {
@@ -22,6 +22,14 @@ func ConnectMongoDBExpenseTracker() {
 	}
 
 	fmt.Println(aurora.Green("*** CONNECTED TO MONGODB: " + cfg.URI + " --- DB: " + cfg.DBName))
-	db = client.Database(cfg.DBName)
+	expenseTrackerDB = client.Database(cfg.DBName)
 	index()
+}
+
+func GetMongoDBExpenseTracker() *mongo.Database {
+	return expenseTrackerDB
+}
+
+func GetCategoryCol() *mongo.Collection {
+	return expenseTrackerDB.Collection(colCategory)
 }

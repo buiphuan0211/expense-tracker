@@ -4,6 +4,51 @@
         "contact": {}
     },
     "paths": {
+        "/categories": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Create",
+                "operationId": "admin-category-create",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Device id",
+                        "name": "device-id",
+                        "in": "header"
+                    },
+                    {
+                        "description": "Payload",
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requestmodel.CategoryCreatePayload"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responsemodel.Upsert"
+                        }
+                    }
+                }
+            }
+        },
         "/ping": {
             "get": {
                 "security": [
@@ -23,6 +68,24 @@
                 "summary": "Ping",
                 "operationId": "ping",
                 "responses": {}
+            }
+        }
+    },
+    "definitions": {
+        "requestmodel.CategoryCreatePayload": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "responsemodel.Upsert": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                }
             }
         }
     }

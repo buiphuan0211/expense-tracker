@@ -1,9 +1,14 @@
 package route
 
-import "github.com/labstack/echo/v4"
+import (
+	"expense-tracker/internal/util/routemiddleware"
+	"github.com/labstack/echo/v4"
+)
 
 func Init(e *echo.Echo) {
-	r := e.Group("/admin/expense")
+	e.Use(routemiddleware.CORSConfig())
 
+	r := e.Group("/admin/expense")
 	common(r)
+	category(r)
 }
