@@ -30,6 +30,8 @@ func server(envVars *config.ENV) {
 	envVars.MongoDB.URI = GetStringValue(fmt.Sprintf("%s/mongodb/uri", commonPrefix))
 	envVars.MongoDB.DBName = GetStringValue(fmt.Sprintf("%s/mongodb/db_name", commonPrefix))
 
+	// Authentication
+	envVars.Auth.SecretKey = GetStringValue(fmt.Sprintf("%s/auth/secret_key", commonPrefix))
 }
 
 // commonValues ...

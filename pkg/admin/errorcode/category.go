@@ -6,6 +6,7 @@ const (
 	CategoryRequiredName = "category_required_name"
 	CategoryNotFound     = "category_not_found"
 	CategoryExistedName  = "category_exists_name"
+	CategoryInvalid      = "category_invalid"
 )
 
 var category = []response.Code{
@@ -18,9 +19,15 @@ var category = []response.Code{
 		Key:     CategoryNotFound,
 		Message: "nhóm chi tiêu không tìm thấy",
 		Code:    201,
-	}, {
+	},
+	{
 		Key:     CategoryExistedName,
 		Message: "tên nhóm chi tiêu đã tồn tại",
 		Code:    202,
+	},
+	{
+		Key:     CategoryInvalid,
+		Message: "nhóm chi tiêu không hợp lệ",
+		Code:    203,
 	},
 }

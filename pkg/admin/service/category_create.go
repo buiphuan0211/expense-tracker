@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"errors"
+	"expense-tracker/internal/util/pconvert"
 	"expense-tracker/pkg/admin/dao"
 	"expense-tracker/pkg/admin/errorcode"
 	requestmodel "expense-tracker/pkg/admin/model/request"
@@ -18,10 +19,12 @@ func (s categoryImpl) Create(ctx context.Context, payload requestmodel.CategoryC
 	}
 
 	var (
-		d   = dao.Category()
-		doc = payload.ConvertToBSON()
+		d     = dao.Category()
+		doc   = payload.ConvertToBSON()
+		staff = s.staff
 	)
 
+	doc.CreatedBy = pconvert.StringToObjectID(staff.ID)
 	if err = d.Create(ctx, doc); err != nil {
 		return
 	}

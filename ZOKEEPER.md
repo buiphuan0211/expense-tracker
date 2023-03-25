@@ -14,3 +14,8 @@ create /expense_tracker/common/mongodb
 create /expense_tracker/common/mongodb/uri "mongodb://localhost:27017"
 create /expense_tracker/common/mongodb/db_name "expense_tracker"
 ```
+
+```shell
+create /expense_tracker/common/auth
+create /expense_tracker/common/auth/secret_key "secret_key_admin"
+```
