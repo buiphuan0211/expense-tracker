@@ -14,6 +14,7 @@ type CategoryInterface interface {
 	FindByID(ctx context.Context, id primitive.ObjectID) (doc *mgmodel.Category, err error)
 	FindByCondition(ctx context.Context, cond interface{}, opts ...*options.FindOptions) (docs []mgmodel.Category)
 	CountByCondition(ctx context.Context, cond interface{}) (total int64)
+	UpdateOneByCondition(ctx context.Context, cond interface{}, payload interface{}) (err error)
 }
 
 // categoryImpl ...

@@ -10,6 +10,11 @@ definitions:
       name:
         type: string
     type: object
+  requestmodel.CategoryUpdatePayload:
+    properties:
+      name:
+        type: string
+    type: object
   responsemodel.CategoryAll:
     properties:
       limit:
@@ -25,7 +30,16 @@ definitions:
     properties:
       _id:
         type: string
-      created:
+      createdAt:
+        $ref: '#/definitions/ptime.TimeResponse'
+      name:
+        type: string
+    type: object
+  responsemodel.CategoryDetail:
+    properties:
+      _id:
+        type: string
+      createdAt:
         $ref: '#/definitions/ptime.TimeResponse'
       name:
         type: string
@@ -97,6 +111,57 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: Create
+      tags:
+      - Category
+  /categories/{id}:
+    get:
+      consumes:
+      - application/json
+      operationId: admin-category-detail
+      parameters:
+      - description: Category id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsemodel.CategoryDetail'
+      security:
+      - ApiKeyAuth: []
+      summary: Detail
+      tags:
+      - Category
+    put:
+      consumes:
+      - application/json
+      operationId: admin-category-update
+      parameters:
+      - description: Category id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/requestmodel.CategoryUpdatePayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsemodel.Upsert'
+      security:
+      - ApiKeyAuth: []
+      summary: Update
       tags:
       - Category
   /ping:

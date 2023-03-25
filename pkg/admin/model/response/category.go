@@ -15,5 +15,12 @@ type CategoryAll struct {
 type CategoryBrief struct {
 	ID        string              `json:"_id"`
 	Name      string              `json:"name"`
-	CreatedAt *ptime.TimeResponse `json:"created"`
+	CreatedAt *ptime.TimeResponse `json:"createdAt"`
+}
+
+// CategoryDetail ...
+type CategoryDetail struct {
+	ID        string              `json:"_id"`
+	Name      string              `json:"name"`
+	CreatedAt *ptime.TimeResponse `json:"createdAt"`
 }

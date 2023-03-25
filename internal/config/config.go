@@ -26,6 +26,10 @@ type ENV struct {
 		CertKeyFilePassword string
 		ReadPrefMode        string
 	}
+
+	Auth struct {
+		SecretKey string
+	}
 }
 
 var env ENV
