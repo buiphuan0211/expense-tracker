@@ -8,6 +8,7 @@ type AppQuery struct {
 	Limit         int64
 	Keyword       string
 	SortInterface interface{}
+	Status        string
 }
 
 // CheckLimit ...

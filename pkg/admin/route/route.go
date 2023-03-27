@@ -13,6 +13,8 @@ func Init(e *echo.Echo) {
 
 	r := e.Group("/admin/expense")
 	common(r)
+	migrate(r)
 	category(r)
 	staff(r)
+	staffAuth(r)
 }

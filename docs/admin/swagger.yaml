@@ -15,6 +15,24 @@ definitions:
       name:
         type: string
     type: object
+  requestmodel.LoginPayload:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  requestmodel.RegisterPayload:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      passwordConfirm:
+        type: string
+    type: object
   responsemodel.CategoryAll:
     properties:
       limit:
@@ -44,6 +62,36 @@ definitions:
       name:
         type: string
     type: object
+  responsemodel.StaffAll:
+    properties:
+      limit:
+        type: integer
+      list:
+        items:
+          $ref: '#/definitions/responsemodel.StaffBrief'
+        type: array
+      page:
+        type: integer
+    type: object
+  responsemodel.StaffBrief:
+    properties:
+      _id:
+        type: string
+      createdAt:
+        $ref: '#/definitions/ptime.TimeResponse'
+      email:
+        type: string
+      isRoot:
+        type: boolean
+      name:
+        type: string
+      permission:
+        items:
+          type: string
+        type: array
+      phone:
+        type: string
+    type: object
   responsemodel.Upsert:
     properties:
       _id:
@@ -63,6 +111,46 @@ info:
   title: manage-expenses - Admin API
   version: "1.0"
 paths:
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      operationId: admin-staff-login
+      parameters:
+      - description: Payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/requestmodel.LoginPayload'
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Login
+      tags:
+      - Auth
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      operationId: admin-staff-register
+      parameters:
+      - description: Payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/requestmodel.RegisterPayload'
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Register
+      tags:
+      - Auth
   /categories:
     get:
       consumes:
@@ -177,6 +265,36 @@ paths:
       summary: Ping
       tags:
       - Common
+  /staffs:
+    get:
+      consumes:
+      - application/json
+      operationId: admin-staff-all
+      parameters:
+      - in: query
+        name: keyword
+        type: string
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: page
+        type: integer
+      - in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsemodel.StaffAll'
+      security:
+      - ApiKeyAuth: []
+      summary: All
+      tags:
+      - Staff
 securityDefinitions:
   ApiKeyAuth:
     in: header

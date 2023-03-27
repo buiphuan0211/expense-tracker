@@ -22,27 +22,28 @@ func Staff() StaffInterface {
 }
 
 // All godoc
-// @tags Category
+// @tags Staff
 // @summary All
-// @id admin-category-all
+// @id admin-staff-all
 // @security ApiKeyAuth
 // @accept json
 // @produce json
-// @param payload query requestmodel.CategoryAll true "Query"
-// @success 200 {object} responsemodel.CategoryAll
-// @router /categories [GET]
+// @param payload query requestmodel.StaffAll true "Query"
+// @success 200 {object} responsemodel.StaffAll
+// @router /staffs [GET]
 func (staffImpl) All(c echo.Context) error {
 	var (
 		ctx     = echocontext.GetContext(c)
-		qParams = echocontext.GetQuery(c).(requestmodel.CategoryAll)
+		qParams = echocontext.GetQuery(c).(requestmodel.StaffAll)
 		staff   = echocontext.GetStaff(c).(*auth.User)
-		s       = service.Category(staff)
+		s       = service.Staff(staff)
 	)
 
 	q := mgquery.AppQuery{
 		Page:          qParams.Page,
 		Limit:         qParams.Limit,
 		Keyword:       qParams.Keyword,
+		Status:        qParams.Status,
 		SortInterface: bson.M{"createdAt": -1},
 	}
 

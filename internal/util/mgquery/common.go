@@ -11,3 +11,9 @@ func (q *AppQuery) AssignKeyword(cond bson.M) {
 		cond["searchString"] = pstring.GenerateQuerySearchString(q.Keyword)
 	}
 }
+
+func (q *AppQuery) AssignStatus(cond bson.M) {
+	if q.Status != "" {
+		cond["status"] = q.Status
+	}
+}
