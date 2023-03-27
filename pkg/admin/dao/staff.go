@@ -6,6 +6,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+// StaffInterface ...
 type StaffInterface interface {
 	FindByCondition(ctx context.Context, cond interface{}, opts ...*options.FindOptions) (docs []mgmodel.Staff)
 	FindOneByCondition(ctx context.Context, cond interface{}, opts ...*options.FindOneOptions) (doc mgmodel.Staff, err error)
@@ -13,8 +14,10 @@ type StaffInterface interface {
 	CountByCondition(ctx context.Context, cond interface{}) (total int64)
 }
 
+// staffImpl ...
 type staffImpl struct{}
 
+// Staff ...
 func Staff() StaffInterface {
 	return staffImpl{}
 }

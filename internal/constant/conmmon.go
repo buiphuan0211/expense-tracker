@@ -6,3 +6,8 @@ var (
 
 	DomainAdmin = "DOMAIN_EXPENSE_TRACKER_ADMIN"
 )
+
+const (
+	StatusActive   = "active"
+	StatusInActive = "inactive"
+)

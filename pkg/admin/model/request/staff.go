@@ -1,6 +1,8 @@
 package requestmodel
 
 import (
+	"expense-tracker/internal/constant"
+	"expense-tracker/pkg/admin/errorcode"
 	validation "github.com/go-ozzo/ozzo-validation/v4"
 )
 
@@ -13,5 +15,10 @@ type StaffAll struct {
 }
 
 func (m StaffAll) Validate() error {
-	return validation.ValidateStruct(&m)
+	statuses := []interface{}{
+		constant.StatusActive,
+		constant.StatusInActive,
+	}
+	return validation.ValidateStruct(&m,
+		validation.Field(&m.Status, validation.Each(validation.In(statuses...).Error(errorcode.StaffInvalidSStatus))))
 }
