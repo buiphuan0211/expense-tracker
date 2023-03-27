@@ -24,6 +24,7 @@ func Staff() StaffInterface {
 func (staffImpl) All(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		var query requestmodel.StaffAll
+
 		if err := c.Bind(&query); err != nil {
 			return response.R400(c, nil, "")
 		}

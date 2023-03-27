@@ -4,7 +4,6 @@ import (
 	"expense-tracker/internal/auth"
 	"expense-tracker/internal/response"
 	"expense-tracker/internal/util/echocontext"
-	"fmt"
 	"github.com/labstack/echo/v4"
 )
 
@@ -23,7 +22,6 @@ func RequiredLogin(next echo.HandlerFunc) echo.HandlerFunc {
 			Name: user.Name,
 		}
 
-		fmt.Println("staff: ", staff) // DEL-LOG
 		echocontext.SetStaff(c, staff)
 		return next(c)
 	}

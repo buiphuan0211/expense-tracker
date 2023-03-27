@@ -12,7 +12,7 @@ import (
 
 // MigrateInterface ...
 type MigrateInterface interface {
-	MigrationStaffs()
+	MigrationStaffAdmin()
 }
 
 // MigrateImpl ...
@@ -24,12 +24,13 @@ func Migrate() MigrateInterface {
 	return MigrateImpl{}
 }
 
-// MigrationStaffs ...
-func (MigrateImpl) MigrationStaffs() {
+// MigrationStaffAdmin ...
+func (MigrateImpl) MigrationStaffAdmin() {
 	var (
 		d   = dao.Staff()
 		ctx = context.Background()
 	)
+
 	payload := mgmodel.Staff{
 		ID:           primitive.NewObjectID(),
 		Name:         "Mèo",
@@ -37,7 +38,7 @@ func (MigrateImpl) MigrationStaffs() {
 		Phone:        "0384062418",
 		Email:        "meo@gmail.com",
 		Password:     pgenerate.HashPassword("1234"),
-		Permission:   []string{"staff_view", "staff_edit"},
+		Permission:   []string{"staff_view", "staff_edit", "category_view", "category_edit"},
 		IsRoot:       true,
 		CreatedAt:    ptime.Now(),
 		UpdatedAt:    ptime.Now(),

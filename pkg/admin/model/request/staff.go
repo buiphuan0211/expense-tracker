@@ -20,5 +20,5 @@ func (m StaffAll) Validate() error {
 		constant.StatusInActive,
 	}
 	return validation.ValidateStruct(&m,
-		validation.Field(&m.Status, validation.Each(validation.In(statuses...).Error(errorcode.StaffInvalidSStatus))))
+		validation.Field(&m.Status, validation.In(statuses...).Error(errorcode.StaffInvalidSStatus)))
 }

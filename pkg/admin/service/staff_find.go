@@ -62,7 +62,7 @@ func (staffImpl) ExistedByEmail(ctx context.Context, email string) (res bool) {
 	return true
 }
 
-// FindByEmail ...
-func (staffImpl) FindByEmail(ctx context.Context, email string) (res mgmodel.Staff, err error) {
+// FindRawByEmail ...
+func (staffImpl) FindRawByEmail(ctx context.Context, email string) (res mgmodel.Staff, err error) {
 	return dao.Staff().FindOneByCondition(ctx, bson.M{"email": email})
 }
