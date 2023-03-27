@@ -14,5 +14,6 @@ func staff(e *echo.Group) {
 		v = routevalidation.Staff()
 	)
 
-	g.POST("/staff", h.All, v.All)
+	// All
+	g.GET("", h.All, v.All)
 }

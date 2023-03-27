@@ -33,3 +33,7 @@ func GetMongoDBExpenseTracker() *mongo.Database {
 func GetCategoryCol() *mongo.Collection {
 	return expenseTrackerDB.Collection(colCategory)
 }
+
+func GetStaffCol() *mongo.Collection {
+	return expenseTrackerDB.Collection(colStaff)
+}

@@ -20,6 +20,70 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/auth/login": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login",
+                "operationId": "admin-staff-login",
+                "parameters": [
+                    {
+                        "description": "Payload",
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requestmodel.LoginPayload"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/auth/register": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register",
+                "operationId": "admin-staff-register",
+                "parameters": [
+                    {
+                        "description": "Payload",
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requestmodel.RegisterPayload"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
         "/categories": {
             "get": {
                 "security": [
@@ -203,6 +267,56 @@ const docTemplate = `{
                 "operationId": "ping",
                 "responses": {}
             }
+        },
+        "/staffs": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Staff"
+                ],
+                "summary": "All",
+                "operationId": "admin-staff-all",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "keyword",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "status",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responsemodel.StaffAll"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -226,6 +340,34 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "requestmodel.LoginPayload": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "requestmodel.RegisterPayload": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "passwordConfirm": {
                     "type": "string"
                 }
             }
@@ -271,6 +413,52 @@ const docTemplate = `{
                     "$ref": "#/definitions/ptime.TimeResponse"
                 },
                 "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "responsemodel.StaffAll": {
+            "type": "object",
+            "properties": {
+                "limit": {
+                    "type": "integer"
+                },
+                "list": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/responsemodel.StaffBrief"
+                    }
+                },
+                "page": {
+                    "type": "integer"
+                }
+            }
+        },
+        "responsemodel.StaffBrief": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "$ref": "#/definitions/ptime.TimeResponse"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "isRoot": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "permission": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "phone": {
                     "type": "string"
                 }
             }

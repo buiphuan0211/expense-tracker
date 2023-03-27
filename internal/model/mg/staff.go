@@ -12,15 +12,9 @@ type Staff struct {
 	SearchString string             `bson:"searchString"`
 	Phone        string             `bson:"phone"`
 	Email        string             `bson:"email"`
+	Password     string             `bson:"password"`
+	Permission   []string           `bson:"permission"`
+	IsRoot       bool               `bson:"isRoot"`
 	CreatedAt    time.Time          `bson:"createdAt"`
 	UpdatedAt    time.Time          `bson:"updatedAt"`
-	Account      StaffAccount       `bson:"account"`
-}
-
-// StaffAccount ...
-type StaffAccount struct {
-	Username   string   `bson:"username"`
-	Password   string   `bson:"password"`
-	Permission []string `bson:"permission"`
-	IsRoot     bool     `bson:"isRoot"`
 }
