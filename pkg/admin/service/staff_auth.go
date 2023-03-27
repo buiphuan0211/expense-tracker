@@ -44,8 +44,9 @@ func (s StaffAuthImpl) Register(ctx context.Context, payload requestmodel.Regist
 
 	// Generate token
 	var payloadToken = requestmodel.TokenPayload{
-		ID:   doc.ID.Hex(),
-		Name: doc.Name,
+		ID:     doc.ID.Hex(),
+		Name:   doc.Name,
+		IsRoot: false,
 	}
 
 	if token, err = pgenerate.TokenString(payloadToken); err != nil {
@@ -66,7 +67,7 @@ func (s StaffAuthImpl) Login(ctx context.Context, payload requestmodel.LoginPayl
 		return
 	}
 
-	staff, err := staffSvc.FindByEmail(ctx, payload.Email)
+	staff, err := staffSvc.FindRawByEmail(ctx, payload.Email)
 	if err != nil {
 		err = errors.New(errorcode.StaffNotFound)
 		return
@@ -79,13 +80,14 @@ func (s StaffAuthImpl) Login(ctx context.Context, payload requestmodel.LoginPayl
 
 	// Generate token
 	var payloadToken = requestmodel.TokenPayload{
-		ID:         staff.ID.Hex(),
-		Name:       staff.Name,
-		Phone:      staff.Phone,
-		Email:      staff.Email,
-		Permission: staff.Permission,
-		IsRoot:     staff.IsRoot,
+		ID:          staff.ID.Hex(),
+		Name:        staff.Name,
+		Phone:       staff.Phone,
+		Email:       staff.Email,
+		Permissions: staff.Permission,
+		IsRoot:      staff.IsRoot,
 	}
+
 	if token, err = pgenerate.TokenString(payloadToken); err != nil {
 		err = errors.New(errorcode.StaffAuthGenerateToken)
 		return

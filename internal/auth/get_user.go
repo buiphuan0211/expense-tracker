@@ -18,6 +18,29 @@ func GetCurrentUserByToken(tokenString string) *User {
 	if tokenString == "" {
 		return nil
 	}
+
+	data, err := getDataClaims(tokenString)
+	if err != nil {
+		return nil
+	}
+
+	var user = new(User)
+
+	id := data["_id"].(string)
+	if id != "" {
+		user.ID = id
+	}
+
+	name := data["name"].(string)
+	if name != "" {
+		user.Name = name
+	}
+
+	return user
+}
+
+// getDataClaims ...
+func getDataClaims(tokenString string) (data map[string]interface{}, err error) {
 	var envVars = config.GetENV()
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		return []byte(envVars.Auth.SecretKey), nil
@@ -34,21 +57,8 @@ func GetCurrentUserByToken(tokenString string) *User {
 
 	claims := token.Claims.(jwt.MapClaims)
 
-	data := claims["data"].(map[string]interface{})
-
-	var user = new(User)
-
-	id := data["_id"].(string)
-	if id != "" {
-		user.ID = data["_id"].(string)
-	}
-
-	name := data["name"].(string)
-	if name != "" {
-		user.Name = data["name"].(string)
-	}
-
-	return user
+	data = claims["data"].(map[string]interface{})
+	return
 }
 
 // GetCurrentUserByTokenError ...

@@ -12,7 +12,7 @@ import (
 type StaffInterface interface {
 	All(ctx context.Context, q mgquery.AppQuery) (res responsemodel.StaffAll)
 	ExistedByEmail(ctx context.Context, username string) (res bool)
-	FindByEmail(ctx context.Context, email string) (res mgmodel.Staff, err error)
+	FindRawByEmail(ctx context.Context, email string) (res mgmodel.Staff, err error)
 }
 
 // staffImpl ...

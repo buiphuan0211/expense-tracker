@@ -1,6 +1,7 @@
 package route
 
 import (
+	"expense-tracker/internal/auth/permission"
 	"expense-tracker/pkg/admin/handler"
 	routeauth "expense-tracker/pkg/admin/route/auth"
 	routevalidation "expense-tracker/pkg/admin/route/validation"
@@ -15,11 +16,13 @@ func category(e *echo.Group) {
 		v = routevalidation.Category()
 	)
 
+	view := routeauth.CheckPermission(permission.Scope.Category.View)
+
 	// Create
 	g.POST("", h.Create, v.Create)
 
 	// All
-	g.GET("", h.All, v.All)
+	g.GET("", h.All, view, v.All)
 
 	// Detail
 	g.GET("/:id", h.Detail, v.ID)

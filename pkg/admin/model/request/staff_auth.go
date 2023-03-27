@@ -13,12 +13,12 @@ import (
 
 // TokenPayload ...
 type TokenPayload struct {
-	ID         string   `json:"_id"`
-	Name       string   `json:"name"`
-	Phone      string   `json:"phone,omitempty"`
-	Email      string   `json:"email,omitempty"`
-	Permission []string `json:"permission,omitempty"`
-	IsRoot     bool     `json:"isRoot,omitempty"`
+	ID          string   `json:"_id"`
+	Name        string   `json:"name"`
+	Phone       string   `json:"phone,omitempty"`
+	Email       string   `json:"email,omitempty"`
+	Permissions []string `json:"permissions,omitempty"`
+	IsRoot      bool     `json:"isRoot"`
 }
 
 // RegisterPayload ...

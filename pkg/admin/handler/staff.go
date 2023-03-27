@@ -38,7 +38,6 @@ func (staffImpl) All(c echo.Context) error {
 		staff   = echocontext.GetStaff(c).(*auth.User)
 		s       = service.Staff(staff)
 	)
-
 	q := mgquery.AppQuery{
 		Page:          qParams.Page,
 		Limit:         qParams.Limit,
