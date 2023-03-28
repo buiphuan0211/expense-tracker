@@ -317,6 +317,52 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/staffs/{id}/update-permissions": {
+            "patch": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Staff"
+                ],
+                "summary": "UpdatePermissions",
+                "operationId": "admin-staff-update-permissions",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Staff id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Payload",
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requestmodel.StaffPermissionUpdatePayload"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responsemodel.Upsert"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -369,6 +415,17 @@ const docTemplate = `{
                 },
                 "passwordConfirm": {
                     "type": "string"
+                }
+            }
+        },
+        "requestmodel.StaffPermissionUpdatePayload": {
+            "type": "object",
+            "properties": {
+                "permissions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 }
             }
         },

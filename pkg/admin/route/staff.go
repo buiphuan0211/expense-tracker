@@ -16,4 +16,6 @@ func staff(e *echo.Group) {
 
 	// All
 	g.GET("", h.All, v.All)
+
+	g.PATCH("/:id/update-permissions", h.UpdatePermissions, v.UpdatePermissions, v.ID)
 }

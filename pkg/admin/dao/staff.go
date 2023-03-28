@@ -12,6 +12,7 @@ type StaffInterface interface {
 	FindOneByCondition(ctx context.Context, cond interface{}, opts ...*options.FindOneOptions) (doc mgmodel.Staff, err error)
 	InsertOne(ctx context.Context, payload mgmodel.Staff) (err error)
 	CountByCondition(ctx context.Context, cond interface{}) (total int64)
+	UpdateOneByCondition(ctx context.Context, cond interface{}, payload interface{}, opts ...*options.UpdateOptions) (err error)
 }
 
 // staffImpl ...

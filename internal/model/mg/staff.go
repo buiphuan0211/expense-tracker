@@ -13,7 +13,7 @@ type Staff struct {
 	Phone        string             `bson:"phone"`
 	Email        string             `bson:"email"`
 	Password     string             `bson:"password"`
-	Permission   []string           `bson:"permission"`
+	Permissions  []string           `bson:"permissions"`
 	IsRoot       bool               `bson:"isRoot"`
 	CreatedAt    time.Time          `bson:"createdAt"`
 	UpdatedAt    time.Time          `bson:"updatedAt"`

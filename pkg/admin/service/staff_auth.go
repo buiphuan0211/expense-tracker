@@ -84,7 +84,7 @@ func (s StaffAuthImpl) Login(ctx context.Context, payload requestmodel.LoginPayl
 		Name:        staff.Name,
 		Phone:       staff.Phone,
 		Email:       staff.Email,
-		Permissions: staff.Permission,
+		Permissions: staff.Permissions,
 		IsRoot:      staff.IsRoot,
 	}
 
