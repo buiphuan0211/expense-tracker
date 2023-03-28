@@ -13,16 +13,16 @@ type StaffAuthInterface interface {
 	Login(next echo.HandlerFunc) echo.HandlerFunc
 }
 
-// StaffAuthImpl ...
-type StaffAuthImpl struct{}
+// staffAuthImpl ...
+type staffAuthImpl struct{}
 
 // StaffAuth ...
 func StaffAuth() StaffAuthInterface {
-	return StaffAuthImpl{}
+	return staffAuthImpl{}
 }
 
 // Register ...
-func (StaffAuthImpl) Register(next echo.HandlerFunc) echo.HandlerFunc {
+func (staffAuthImpl) Register(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		var payload requestmodel.RegisterPayload
 
@@ -40,7 +40,7 @@ func (StaffAuthImpl) Register(next echo.HandlerFunc) echo.HandlerFunc {
 }
 
 // Login ...
-func (StaffAuthImpl) Login(next echo.HandlerFunc) echo.HandlerFunc {
+func (staffAuthImpl) Login(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		var payload requestmodel.LoginPayload
 		if err := c.Bind(&payload); err != nil {

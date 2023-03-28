@@ -13,4 +13,8 @@ var Scope = struct {
 		View: getPermissionsView(category),
 		Edit: getPermissionsEdit(category),
 	},
+	Staff: listPermissions{
+		View: getPermissionsView(staff),
+		Edit: getPermissionsEdit(staff),
+	},
 }

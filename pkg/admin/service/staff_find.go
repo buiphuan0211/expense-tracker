@@ -4,6 +4,7 @@ import (
 	"context"
 	mgmodel "expense-tracker/internal/model/mg"
 	"expense-tracker/internal/util/mgquery"
+	"expense-tracker/internal/util/pconvert"
 	"expense-tracker/pkg/admin/dao"
 	responsemodel "expense-tracker/pkg/admin/model/response"
 	"go.mongodb.org/mongo-driver/bson"
@@ -49,20 +50,23 @@ func (s staffImpl) All(ctx context.Context, q mgquery.AppQuery) (res responsemod
 
 // ExistedByEmail ...
 func (staffImpl) ExistedByEmail(ctx context.Context, email string) (res bool) {
-	var (
-		d    = dao.Staff()
-		cond = bson.M{"email": email}
-	)
-
-	_, err := d.FindOneByCondition(ctx, cond)
+	_, err := dao.Staff().FindOneByCondition(ctx, bson.M{"email": email})
 	if err != nil {
 		return
 	}
-
 	return true
 }
 
 // FindRawByEmail ...
 func (staffImpl) FindRawByEmail(ctx context.Context, email string) (res mgmodel.Staff, err error) {
 	return dao.Staff().FindOneByCondition(ctx, bson.M{"email": email})
+}
+
+// ExistedByID ...
+func (staffImpl) ExistedByID(ctx context.Context, id string) (res bool) {
+	_, err := dao.Staff().FindOneByCondition(ctx, bson.M{"_id": pconvert.StringToObjectID(id)})
+	if err != nil {
+		return
+	}
+	return true
 }

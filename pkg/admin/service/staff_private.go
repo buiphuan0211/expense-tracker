@@ -28,7 +28,7 @@ func (staffImpl) brief(ctx context.Context, doc mgmodel.Staff) responsemodel.Sta
 		Name:       doc.Name,
 		Phone:      doc.Phone,
 		Email:      doc.Email,
-		Permission: doc.Permission,
+		Permission: doc.Permissions,
 		IsRoot:     doc.IsRoot,
 		CreatedAt:  ptime.TimeResponseInit(doc.CreatedAt),
 	}

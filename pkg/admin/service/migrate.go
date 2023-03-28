@@ -38,7 +38,7 @@ func (MigrateImpl) MigrationStaffAdmin() {
 		Phone:        "0384062418",
 		Email:        "meo@gmail.com",
 		Password:     pgenerate.HashPassword("1234"),
-		Permission:   []string{"staff_view", "staff_edit", "category_view", "category_edit"},
+		Permissions:  []string{"staff_view", "staff_edit", "category_view", "category_edit"},
 		IsRoot:       true,
 		CreatedAt:    ptime.Now(),
 		UpdatedAt:    ptime.Now(),

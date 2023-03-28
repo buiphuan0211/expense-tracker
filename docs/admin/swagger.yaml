@@ -33,6 +33,13 @@ definitions:
       passwordConfirm:
         type: string
     type: object
+  requestmodel.StaffPermissionUpdatePayload:
+    properties:
+      permissions:
+        items:
+          type: string
+        type: array
+    type: object
   responsemodel.CategoryAll:
     properties:
       limit:
@@ -293,6 +300,35 @@ paths:
       security:
       - ApiKeyAuth: []
       summary: All
+      tags:
+      - Staff
+  /staffs/{id}/update-permissions:
+    patch:
+      consumes:
+      - application/json
+      operationId: admin-staff-update-permissions
+      parameters:
+      - description: Staff id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/requestmodel.StaffPermissionUpdatePayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responsemodel.Upsert'
+      security:
+      - ApiKeyAuth: []
+      summary: UpdatePermissions
       tags:
       - Staff
 securityDefinitions:

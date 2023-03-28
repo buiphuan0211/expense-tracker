@@ -14,12 +14,12 @@ type StaffAuthInterface interface {
 	Login(c echo.Context) error
 }
 
-// StaffAuthImpl ...
-type StaffAuthImpl struct{}
+// staffAuthImpl ...
+type staffAuthImpl struct{}
 
 // StaffAuth ...
 func StaffAuth() StaffAuthInterface {
-	return StaffAuthImpl{}
+	return staffAuthImpl{}
 }
 
 // Register godoc
@@ -31,7 +31,7 @@ func StaffAuth() StaffAuthInterface {
 // @produce json
 // @param payload body requestmodel.RegisterPayload true "Payload"
 // @router /auth/register [POST]
-func (StaffAuthImpl) Register(c echo.Context) error {
+func (staffAuthImpl) Register(c echo.Context) error {
 	var (
 		ctx     = echocontext.GetContext(c)
 		payload = echocontext.GetPayload(c).(requestmodel.RegisterPayload)
@@ -54,7 +54,7 @@ func (StaffAuthImpl) Register(c echo.Context) error {
 // @produce json
 // @param payload body requestmodel.LoginPayload true "Payload"
 // @router /auth/login [POST]
-func (StaffAuthImpl) Login(c echo.Context) error {
+func (staffAuthImpl) Login(c echo.Context) error {
 	var (
 		ctx     = echocontext.GetContext(c)
 		payload = echocontext.GetPayload(c).(requestmodel.LoginPayload)
