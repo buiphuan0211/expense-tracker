@@ -4,7 +4,7 @@ import (
 	"expense-tracker/internal/config"
 	"expense-tracker/internal/config/plogger"
 	"fmt"
-	"github.com/golang-jwt/jwt"
+	"github.com/golang-jwt/jwt/v4"
 	"github.com/kr/pretty"
 )
 
